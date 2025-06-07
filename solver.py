@@ -1,15 +1,17 @@
 def get_user_board():
     board = []
-    print("Enter 9 rows of 9 digits (use 0 for empty spaces):")
+    print("Enter 9 rows of 9 characters (use space or 0 for empty cells):")
     for i in range(9):
         while True:
-            row_input = input(f"Row {i + 1}: ")
-            if len(row_input) == 9 and row_input.isdigit():
-                board.append([int(char) for char in row_input])
+            row_input = input(f"Row {i + 1}: ").strip()
+            if len(row_input) == 9 and all(c.isdigit() or c == ' ' for c in row_input):
+                row = [int(c) if c.isdigit() else 0 for c in row_input]
+                board.append(row)
                 break
             else:
-                print("Invalid input. Please enter exactly 9 digits (0–9).")
+                print("Invalid input. Please enter exactly 9 digits or spaces.")
     return board
+
 
 board = get_user_board()
 
